@@ -17,8 +17,6 @@ env:
 
 permissions: # added using https://github.com/step-security/secure-workflows
   contents: read
-  id-token: write
-  attestations: write
 
 jobs:
   check:
@@ -161,10 +159,6 @@ jobs:
           files: |
             builds/release-tars-**/*
           make_latest: false
-      - name: List files in builds directory
-        run: |
-          ls -la builds
-          ls -l builds/release-tars-**/*
       - name: Attest Artifacts
         uses: actions/attest-build-provenance@v1
         with:
