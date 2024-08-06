@@ -161,7 +161,9 @@ jobs:
           files: |
             builds/release-tars-**/*
           make_latest: false
+      - name: List files in builds directory
+        run: ls -la builds
       - name: Attest Artifacts
         uses: actions/attest-build-provenance@v1
         with:
-          subject-path: ./builds/*.tar.gz
+          subject-path: ./builds/release-tars-*.tar.gz
