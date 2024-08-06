@@ -164,4 +164,4 @@ jobs:
       - name: Attest Artifacts
         uses: actions/attest-build-provenance@v1
         with:
-          subject-path: builds/*.tar.gz
+          subject-path: ./builds/*.tar.gz
