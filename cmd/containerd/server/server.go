@@ -482,6 +482,7 @@ func LoadPlugins(ctx context.Context, config *srvconfig.Config) ([]plugin.Regist
 		config.PluginDir = path //nolint:staticcheck
 		log.G(ctx).Warningf("loaded %d dynamic plugins. `go_plugin` is deprecated, please use `external plugins` instead", count)
 	}
+
 	// load additional plugins that don't automatically register themselves
 	registry.Register(&plugin.Registration{
 		Type: plugins.ContentPlugin,
