@@ -12,12 +12,7 @@ import (
 	"github.com/coreos/go-systemd/v22/daemon"
 )
 
-const (
-	pluginid = "777Watchdog"
-)
-
 func init() {
-	fmt.Println("Starting " + pluginid)
 	registry.Register(&plugin.Registration{
 		Type:     plugins.WatchdogPlugin,
 		ID:       "daemon-health",
@@ -54,6 +49,7 @@ type service struct {
 
 func notifyDaemon(interval time.Duration) {
 	go func() {
+		i := 0
 		ticker := time.NewTicker(interval)
 		defer ticker.Stop()
 
@@ -63,7 +59,12 @@ func notifyDaemon(interval time.Duration) {
 			if err != nil {
 				fmt.Println("WATCHDOG ERRROR - ", err)
 			}
+			i++
 			fmt.Println("Sent watchdog notification -", ack)
+			if i == 8{
+				fmt.Println("Sleep for 30 seconds")
+				time.Sleep(35 * time.Second)
+			}
 		}
 	}()
 }
